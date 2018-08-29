@@ -12,7 +12,7 @@
         $stmt = $dbh->prepare($sql); // 準備
         $stmt->execute($data); // 実行
 
-        // 一致したレコードを使える形で取得する
+        // 一致したレコードを使える形で取得する（フェッチする）
         $member = $stmt->fetch(PDO::FETCH_ASSOC);
         // echo '<br>';
         // echo '<br>';
