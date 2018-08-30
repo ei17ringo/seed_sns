@@ -24,6 +24,25 @@
     // ログインしているユーザーの情報を$login_memberに代入
     $login_member = $stmt->fetch(PDO::FETCH_ASSOC);
 
+    //つぶやきをDBに保存
+
+    //つぶやきボタンが押された時
+    if (!empty($_POST)) {
+        //つぶやきを登録するためのInsert文を作成
+        $sql = 'INSERT INTO `tweets`( `tweet`, `member_id`, `reply_tweet_id`, `created`) VALUES (?,?,?,now())';
+
+        //SQL文実行
+        $data = array($_POST['tweet'],$_SESSION['id'],-1);
+        $stmt = $dbh->prepare($sql); // 準備
+        $stmt->execute($data); // 実行
+
+        //自分の画面へ移動する（データの再送信防止）
+        header("Location: index.php");
+
+    }
+
+
+
 ?>
 
 <!DOCTYPE html>
